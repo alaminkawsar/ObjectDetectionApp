@@ -49,6 +49,7 @@ class ViewController: UIViewController {
             
             let width = CVPixelBufferGetWidth(pixelBuffer)
             let height = CVPixelBufferGetHeight(pixelBuffer)
+            print(width,height)
 
             DispatchQueue.main.async {
                 
@@ -57,17 +58,50 @@ class ViewController: UIViewController {
             }
             //print(result.inferences.count)
             let inference = result.inferences
-            for i in 0...(inference.count)-1 {
+            for i in 0...inference.count-2 {
                 textField.text! += String(i + 1) + "." + inference[i].className
                 textField.text! += "\n"
-                print(inference[i].rect.midX, inference[i].rect.midY, inference[i].rect.height, inference[i].rect.width)
+                //drawBorders(borderRect: inference[i].rect)
+                //print(inference[i].rect.midX, inference[i].rect.midY, inference[i].rect.height, inference[i].rect.width)
+                //imageView.image = drawRectangleOnImage(image: imageView.image!,midX: inference[i].rect.midX, midY: inference[i].rect.midY, height: inference[i].rect.height, width: inference[i].rect.width)
+                
+                draxBox(x: inference[i].rect.midX*imageView.frame.width / (CGFloat(width)), y: inference[i].rect.midY*imageView.frame.height/(CGFloat(height)), width: inference[i].rect.width/2, height: inference[i].rect.height/2)
+                print(imageView.frame.width,imageView.frame.height)
                 
             }
         }
     }
     
-    
+    private func draxBox(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat) {
+        
+        let redView = UIView()
+        redView.backgroundColor = .red
+        redView.alpha = 0.4
+        redView.frame = CGRect(x: x, y: x, width: width, height: height)
+        print(x,y,width,height)
+        self.view.addSubview(redView)
+        
+        //print(faceObservation.boundingBox)
+    }
 
+    
+    
+    func drawRectangleOnImage(image: UIImage, midX: CGFloat, midY: CGFloat, height: CGFloat, width: CGFloat) -> UIImage {
+        let imageSize = image.size
+        let scale: CGFloat = 0
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, scale)
+
+        image.draw(at: CGPoint.zero)
+
+        let rectangle = CGRect(x: midX, y: midY, width: 30, height: 30)
+
+        UIColor.green.setFill()
+        UIRectFill(rectangle)
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
+    }
 
 }
 
