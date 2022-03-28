@@ -11,13 +11,22 @@ class ViewController: UIViewController {
     
     private var modelDataHandler: ModelDataHandler? =
       ModelDataHandler(modelFileInfo: MobileNetSSD.modelInfo, labelsFileInfo: MobileNetSSD.labelsInfo)
-
-    @IBOutlet var textField: UITextField!
+    var imageNumber: Int = 2
+    var imageCount: Int = 1
+    @IBOutlet var textField: UITextView!
     @IBOutlet var imageView: UIImageView!
 
     @IBAction func nextButton(_ sender: Any) {
+        textField.text = ""
+        if imageCount>=imageNumber {
+            imageCount = 1
+        }else {
+            imageCount += 1
+        }
+        imageView.image = UIImage(named: String(imageCount))
     }
     @IBAction func detectObject(_ sender: Any) {
+        textField.text = ""
         doInference()
     }
 
@@ -38,9 +47,26 @@ class ViewController: UIViewController {
                 return
             }
             
-            
+            let width = CVPixelBufferGetWidth(pixelBuffer)
+            let height = CVPixelBufferGetHeight(pixelBuffer)
+
+            DispatchQueue.main.async {
+                
+              // Draws the bounding boxes and displays class names and confidence scores.
+              //self.drawAfterPerformingCalculations(onInferences: result.inferences, withImageSize: CGSize(width: CGFloat(width), height: CGFloat(height)))
+            }
+            //print(result.inferences.count)
+            let inference = result.inferences
+            for i in 0...(inference.count)-1 {
+                textField.text! += String(i + 1) + "." + inference[i].className
+                textField.text! += "\n"
+                print(inference[i].rect.midX, inference[i].rect.midY, inference[i].rect.height, inference[i].rect.width)
+                
+            }
         }
     }
+    
+    
 
 
 }
