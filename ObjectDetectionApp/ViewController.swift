@@ -58,6 +58,7 @@ class ViewController: UIViewController {
             }
             //print(result.inferences.count)
             let inference = result.inferences
+            imageView.image = drawDetectionsOnImage(inference, imageView.image!)
             for i in 0...inference.count-2 {
                 textField.text! += String(i + 1) + "." + inference[i].className
                 textField.text! += "\n"
@@ -65,8 +66,8 @@ class ViewController: UIViewController {
                 //print(inference[i].rect.midX, inference[i].rect.midY, inference[i].rect.height, inference[i].rect.width)
                 //imageView.image = drawRectangleOnImage(image: imageView.image!,midX: inference[i].rect.midX, midY: inference[i].rect.midY, height: inference[i].rect.height, width: inference[i].rect.width)
                 
-                draxBox(x: inference[i].rect.midX*imageView.frame.width / (CGFloat(width)), y: inference[i].rect.midY*imageView.frame.height/(CGFloat(height)), width: inference[i].rect.width/2, height: inference[i].rect.height/2)
-                print(imageView.frame.width,imageView.frame.height)
+                //draxBox(x: inference[i].rect.midX*imageView.frame.width / (CGFloat(width)), y: inference[i].rect.midY*imageView.frame.height/(CGFloat(height)), width: inference[i].rect.width/2, height: inference[i].rect.height/2)
+                //print(imageView.frame.width,imageView.frame.height)
                 
             }
         }
@@ -83,6 +84,47 @@ class ViewController: UIViewController {
         
         //print(faceObservation.boundingBox)
     }
+    
+    func drawDetectionsOnImage(_ detections: [Inference], _ image: UIImage) -> UIImage? {
+        let imageSize = image.size
+        let scale: CGFloat = 0.0
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, scale)
+
+        image.draw(at: CGPoint.zero)
+        let ctx = UIGraphicsGetCurrentContext()
+        var rects:[CGRect] = []
+        for detection in detections {
+            rects.append(detection.rect)
+            
+            if detection.className != "" {
+                let labelText = detection.className
+                let text = "\(labelText) : \(round(detection.confidence*100))"
+                    let textRect  = CGRect(x: detection.rect.minX + imageSize.width * 0.01, y: detection.rect.minY + imageSize.width * 0.01, width: detection.rect.width, height: detection.rect.height)
+                            
+                let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+                            
+                let textFontAttributes = [
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: textRect.width * 0.1, weight: .bold),
+                    NSAttributedString.Key.foregroundColor: detection.displayColor,
+                    NSAttributedString.Key.paragraphStyle: textStyle
+                ]
+                            
+                text.draw(in: textRect, withAttributes: textFontAttributes)
+                ctx?.addRect(detection.rect)
+                ctx?.setStrokeColor(detection.displayColor.cgColor)
+                ctx?.setLineWidth(9.0)
+                ctx?.strokePath()
+            }
+        }
+
+        guard let drawnImage = UIGraphicsGetImageFromCurrentImageContext() else {
+            fatalError()
+        }
+
+        UIGraphicsEndImageContext()
+        return drawnImage
+    }
+
 
     
     
