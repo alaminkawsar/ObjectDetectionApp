@@ -21,6 +21,7 @@
 		1D600DA327F188FC00FF3ABB /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D600DA227F188FC00FF3ABB /* UIColorExtension.swift */; };
 		1D600DA527F1896600FF3ABB /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D600DA427F1896600FF3ABB /* StringExtension.swift */; };
 		1D600DA727F1C1AC00FF3ABB /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D600DA627F1C1AB00FF3ABB /* OverlayView.swift */; };
+		1D935FDE27FC4A390004AEFA /* DrawImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D935FDD27FC4A390004AEFA /* DrawImage.swift */; };
 		80B0F13014AC8FDC34A00995 /* Pods_ObjectDetectionApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD0C54F9B87B472ACAF3514 /* Pods_ObjectDetectionApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		1D600DA227F188FC00FF3ABB /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		1D600DA427F1896600FF3ABB /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		1D600DA627F1C1AB00FF3ABB /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		1D935FDD27FC4A390004AEFA /* DrawImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawImage.swift; sourceTree = "<group>"; };
 		80A09F4F9DE438F7AC816642 /* Pods-ObjectDetectionApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjectDetectionApp.release.xcconfig"; path = "Target Support Files/Pods-ObjectDetectionApp/Pods-ObjectDetectionApp.release.xcconfig"; sourceTree = "<group>"; };
 		A44D4AF87C4ACC4C1B1E9A10 /* Pods-ObjectDetectionApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjectDetectionApp.debug.xcconfig"; path = "Target Support Files/Pods-ObjectDetectionApp/Pods-ObjectDetectionApp.debug.xcconfig"; sourceTree = "<group>"; };
 		DCD0C54F9B87B472ACAF3514 /* Pods_ObjectDetectionApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ObjectDetectionApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +85,7 @@
 				1D600D8127F0C4E300FF3ABB /* AppDelegate.swift */,
 				1D600D8327F0C4E300FF3ABB /* SceneDelegate.swift */,
 				1D600D8527F0C4E300FF3ABB /* ViewController.swift */,
+				1D935FDD27FC4A390004AEFA /* DrawImage.swift */,
 				1D600DA827F1C1B100FF3ABB /* Views */,
 				1D600DA127F1889C00FF3ABB /* Extensions */,
 				1D600D9927F177FB00FF3ABB /* ModelHandler */,
@@ -255,6 +258,7 @@
 				1D600D9827F0C66B00FF3ABB /* ModelHandler.swift in Sources */,
 				1D600D8427F0C4E300FF3ABB /* SceneDelegate.swift in Sources */,
 				1D600DA327F188FC00FF3ABB /* UIColorExtension.swift in Sources */,
+				1D935FDE27FC4A390004AEFA /* DrawImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
